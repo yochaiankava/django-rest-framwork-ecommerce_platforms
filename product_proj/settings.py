@@ -44,9 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'product',
-    'rest_framework',
+    'product',   
     'corsheaders',
+    'rest_framework',
     'rest_framework_simplejwt',
 ]
 
@@ -61,6 +61,21 @@ REST_FRAMEWORK = {
     )
  
 }
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+    'SLIDING_TOKEN_LIFETIME': timedelta(days=1),
+    'SLIDING_TOKEN_LIFETIME_GRACE_PERIOD': timedelta(minutes=60),
+    'SLIDING_TOKEN_REFRESH_LIFETIME_GRACE_PERIOD': timedelta(minutes=60),
+    'SLIDING_TOKEN_REFRESH_LIFETIME_ALGORITHM': 'HS256',
+    'SLIDING_TOKEN_ALGORITHM': 'HS256',
+    'SLIDING_TOKEN_REFRESH_GRACE_PERIOD': timedelta(days=1),
+    'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
+    'SLIDING_TOKEN_TOKEN_TYPE_CLAIM': 'token_type',
+}
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

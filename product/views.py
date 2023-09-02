@@ -127,54 +127,54 @@ def category_detail(request, id):
         category.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-# @api_view(['GET', 'POST'])
-# def cart(request):
-#     if request.method == 'GET':
-#         search = request.GET.get('search')
+@api_view(['GET', 'POST'])
+def cart(request):
+    if request.method == 'GET':
+        search = request.GET.get('search')
        
-#         all_carts = Cart.objects.all()
-#         # search all product that name contains search parameter
-#         if search:
-#             all_carts = all_carts.filter(name__contains=search)        
+        all_carts = Cart.objects.all()
+        # search all product that name contains search parameter
+        if search:
+            all_carts = all_carts.filter(name__contains=search)        
 
-#         all_carts_json = CartSerializer(all_carts, many=True).data
-#         return Response(all_carts_json)
-#     elif request.method == 'POST':
-#         # this line creates a serializer object from json data        
-#         serializer = CartSerializer(data=request.data)
-#         # this line checkes validity of json data 
-#         if serializer.is_valid():
-#             # the serializer.save - saves a new product object
-#             serializer.save()
-#             # returns the object that was created including id
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         # if not valid. return errors.
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)     
+        all_carts_json = CartSerializer(all_carts, many=True).data
+        return Response(all_carts_json)
+    elif request.method == 'POST':
+        # this line creates a serializer object from json data        
+        serializer = CartSerializer(data=request.data)
+        # this line checkes validity of json data 
+        if serializer.is_valid():
+            # the serializer.save - saves a new product object
+            serializer.save()
+            # returns the object that was created including id
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        # if not valid. return errors.
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)     
 
-# @api_view(['GET', 'PUT', 'DELETE'])
-# def cart_detail(request, id):
-#     # get object from db by id
-#     try:
-#         cart = Cart.objects.get(pk=id)
-#     except Cart.DoesNotExist:
-#         return Response(status=status.HTTP_404_NOT_FOUND)
-#     # GET
-#     if request.method == 'GET':
-#         # create serializer from object
-#         serializer = CartSerializer(cart)
-#         # return json using serializer
-#         return Response(serializer.data)
-#     # PUT
-#     elif request.method == 'PUT':
-#         serializer = CartSerializer(cart, data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#     # DELETE
-#     elif request.method == 'DELETE':
-#         # product.is_active = False
-#         # product.save()
-#         cart.delete()
-#         return Response(status=status.HTTP_204_NO_CONTENT)
+@api_view(['GET', 'PUT', 'DELETE'])
+def cart_detail(request, id):
+    # get object from db by id
+    try:
+        cart = Cart.objects.get(pk=id)
+    except Cart.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    # GET
+    if request.method == 'GET':
+        # create serializer from object
+        serializer = CartSerializer(cart)
+        # return json using serializer
+        return Response(serializer.data)
+    # PUT
+    elif request.method == 'PUT':
+        serializer = CartSerializer(cart, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    # DELETE
+    elif request.method == 'DELETE':
+        # product.is_active = False
+        # product.save()
+        cart.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
     
